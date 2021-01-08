@@ -14,30 +14,34 @@ menus:
   tags: /tags
   categories: /categories
   about: /about
-  friends: /links
-  # artitalk: /shuoshuo # You can uncomment to add this route
+  # friends: /links
+  # You can uncomment to add this route
+  artitalk: /shuoshuo
+  # artitalk: 
+  #   url: /shuoshuo
+  #   icon: fas fa-comment
 
 about:
   description: hello, I am Codey Chen, a NLP engineer, especially focusing on conversation AI. 
   social_links:
     # - { icon: icon, link: your link }
 
-#------------------------
-# Links
-#------------------------
-links:
-  # name:
-  #   url: https://example.com
-  #   avatar:
-  #   description:
-  #------------------------
-  # tip: if you want to use QQ avatar without giving away your QQ number,
-  # you can use this api to get an encrypted url:
-  # https://ptlogin2.qq.com/getface?appid=1006102&imgtype=3&uin=${yourQQNumber}
-  # and use the encrypted url in the json
-  #------------------------
-  QQ:
-    url: https://ptlogin2.qq.com/getface?appid=1006102&imgtype=3&uin=690596785
+# #------------------------
+# # Links
+# #------------------------
+# links:
+#   # name:
+#   #   url: https://example.com
+#   #   avatar:
+#   #   description:
+#   #------------------------
+#   # tip: if you want to use QQ avatar without giving away your QQ number,
+#   # you can use this api to get an encrypted url:
+#   # https://ptlogin2.qq.com/getface?appid=1006102&imgtype=3&uin=${yourQQNumber}
+#   # and use the encrypted url in the json
+#   #------------------------
+#   QQ:
+#     url: https://ptlogin2.qq.com/getface?appid=1006102&imgtype=3&uin=690596785
 
 #------------------------
 # Post
@@ -66,6 +70,8 @@ og:
   image: true
   description: true
   article: true
+
+
 #------------------------
 # Footer
 #------------------------
@@ -81,11 +87,13 @@ footer:
   RecordInfo: "" # your Record info such as '某ICP备xxx号'
   govRecordInfo: "" # your gov record info such as '某公网安备xxx号'
   govRecordUrl: "" # your gov record url
+
+
   #------------------------
   # pv / uv statistics config
   #------------------------
   statistics:
-    enable: false
+    enable: true
     type: busuanzi # now version only supports busuanzi
     pv:
       enable: true
@@ -96,6 +104,7 @@ footer:
 
 widgets:
   showWidgetsMobiles: "none"
+
 #------------------------
 # animation config
 #------------------------
@@ -106,12 +115,12 @@ scrollUpAnimation: true
 # comment config
 #------------------------
 comment:
-  enable: false
+  enable: true
   type: valine # valine | gitalk | livere | disqus | we recommend valine
   # gitalk config details can see in https://github.com/gitalk/gitalk/blob/master/readme-cn.md
   valine:
-    appId:
-    appKey:
+    appId: LC7p0faybQsaBhYb4lg1yjQd-MdYXbMMI
+    appKey: uu6JdEPv1lLNFqIMvsG0EKOs
     placeholder: Just go go
     path: window.location.pathname
     avatar: mp
@@ -147,12 +156,12 @@ comment:
 # choose true to use latex by mathjax or katex
 # warning: latex rendering will put lots of loading burden on page loading
 latex:
-  enable: false
-  engine: mathjax # mathjax | katex
+  enable: true
+  engine: katex # mathjax | katex
   # for better rendering effect, when you choose mathjax, you can use it directly but you will lose some effect
   # so you can use hexo-renderer-kramed
   # when you choose katex, you must use hexo-renderer-markdown-it-plus or other render engine
-  global: false
+  global: true
   # when you choose false, you can use latex by `latex: true` in post front-matter
 
 #------------------------
@@ -167,25 +176,30 @@ lazyload:
 #------------------------
 lightbox:
   enable: true
+
 # If your hexo version is below 5.0.0, please upgrade first to use this config
 # we support eight highlight themes, you can go to prism website (https://prismjs.com) for more information
 # theme: default | coy | dark | funky | okaidia | solarizedlight | tomorrow | twilight
 prism:
-  theme:
+  theme: twilight
+
 # show the number of words in posts
 wordcount:
   enable: true
+
 # Analytics config
 analytics:
   enable: false
   type: google # google
   google:
     id: # you can see more information in https://analytics.google.com/
+
 # Doc：https://artitalk.js.org/
 artitalk:
-  enable: false
-  appId: 
-  appKey: 
+  enable: true
+  appId: LC7p0faybQsaBhYb4lg1yjQd-MdYXbMMI
+  appKey: uu6JdEPv1lLNFqIMvsG0EKOs
+
 #------------------------
 # minify config
 # css minify uses autoprefixer and clean-css
@@ -193,10 +207,11 @@ artitalk:
 # html minify uses html-minifier
 #------------------------
 minify:
-  enable: false
+  enable: true
   css: true
   js: true
   html: true
+
 #------------------------
 # theme design config
 #------------------------
@@ -219,7 +234,7 @@ color:
   code-background-color: "#e9eaf0"
 
 font:
-  font-size: 16px # global font-size
+  font-size: 12px # global font-size
   font-family: '-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif' # global font-family
 
 #------------------------

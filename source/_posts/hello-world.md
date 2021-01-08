@@ -36,3 +36,8 @@ $ hexo deploy
 ```
 
 More info: [Deployment](https://hexo.io/docs/one-command-deployment.html)
+
+Latex Math Support
+$$
+x = b \pm \frac{\sqrt{b^2 - 4ac}}{2a}
+$$

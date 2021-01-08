@@ -10,7 +10,9 @@ env:
   GIT_EMAIL: loveychen@live.com
   # THEME_REPO: LouisBarranqueiro/hexo-theme-tranquilpeak
   # THEME_BRANCH: master
-  DEPLOY_REPO: ${{ env.GIT_USER }}/${{ env.GIT_USER }}.github.io
+  # 环境变量内部不能相互引用, 参考 https://github.community/t/how-to-use-env-context/16975/2
+  # DEPLOY_REPO: ${{ env.GIT_USER }}/${{ env.GIT_USER }}.github.io
+  DEPLOY_REPO: loveychen/loveychen.github.io.git
   DEPLOY_BRANCH: main
 
 jobs:

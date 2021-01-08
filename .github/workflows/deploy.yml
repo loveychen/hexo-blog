@@ -8,9 +8,9 @@ on:
 env:
   GIT_USER: loveychen
   GIT_EMAIL: loveychen@live.com
-  THEME_REPO: LouisBarranqueiro/hexo-theme-tranquilpeak
-  THEME_BRANCH: master
-  DEPLOY_REPO: loveychen/loveychen.github.io
+  # THEME_REPO: LouisBarranqueiro/hexo-theme-tranquilpeak
+  # THEME_BRANCH: master
+  DEPLOY_REPO: ${{ GIT_USER }}/${{ GIT_USER }}.github.io
   DEPLOY_BRANCH: main
 
 jobs:

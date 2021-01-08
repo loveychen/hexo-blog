@@ -10,7 +10,7 @@ env:
   GIT_EMAIL: loveychen@live.com
   # THEME_REPO: LouisBarranqueiro/hexo-theme-tranquilpeak
   # THEME_BRANCH: master
-  DEPLOY_REPO: ${{ GIT_USER }}/${{ GIT_USER }}.github.io
+  DEPLOY_REPO: ${{ env.GIT_USER }}/${{ env.GIT_USER }}.github.io
   DEPLOY_BRANCH: main
 
 jobs:

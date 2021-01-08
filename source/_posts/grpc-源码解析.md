@@ -697,7 +697,7 @@ class Channel(grpc.Channel):
 
 `cygrpc.Channel` 的初始化函数如下:
 
-```Cython
+```python
 cdef class Channel:
 
   def __cinit__(

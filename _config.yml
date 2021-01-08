@@ -8,7 +8,7 @@ subtitle: 胖子叔叔的博客屋
 description: ''
 keywords:
 author: chen diao
-language: zh
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
@@ -44,15 +44,18 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
+
+# hightlight_theme: night bright
 highlight:
-  enable: true
+  enable: false
   line_number: true
   auto_detect: false
   tab_replace: ''
   wrap: true
   hljs: false
+
 prismjs:
-  enable: false
+  enable: true
   preprocess: true
   line_number: true
   tab_replace: ''

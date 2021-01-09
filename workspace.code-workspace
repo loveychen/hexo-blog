@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".",
+			"name": "loveychen.github.io"
+		},
+		{
+			"path": "themes/kaze",
+			"name": "hexo-kaze-theme"
+		}
+	],
+	"settings": {}
+}

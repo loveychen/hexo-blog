@@ -1,7 +1,11 @@
 ---
-title: ConvLab2 介绍 (一): User Simulator
+title: ConvLab2 介绍(一) User Simulator
 date: 2021-04-14 15:29:43
-tags: TOD; ConvLab2; User Simulator
+tags: 
+    - TOD
+    - ConvLab2
+    - User Simulator
+    - 更新中
 ---
 
 
@@ -62,10 +66,10 @@ User Goal 和 User Agenda 组成了 User Simulator 的 **User Dialogue State**, 
 
 
 
-```math
+$$
 S = <A, G> \\
 G = <C, R>
-```
+$$
 
 其中 S 表示 State, A 表示 Agenda, G 表示 User Goal, C 表示 Constraints, R 表示 Requests.
 
@@ -75,82 +79,132 @@ G = <C, R>
 
 而 Dialogue State 与 Dialogue Act 组成了一个 Dialogue, 即:
 
-```math
+$$
 S_t \xrightarrow{a_u} S_t^{'} \xrightarrow{a_m} S_{t+1} 
-```
+$$
 
 基于此, 用户建模可以划分为三个部分:
 
-* Action Selection: `$P(a_u | S_t)$`, 用户模型在对话状态 `$S_t$` 下, 选择 User Action `$a_u$` 的概率.
-* System State Transition: `$P(S_t^{'} | a_u, S_t)$`, 系统模型在对话状态 `$S_t$` 及 User Action `$a_u$` 下, 转移到新状态 `$S_t^{'}$` 的概率
-* ~~`$P(a_m | S_t^{'})$` 系统模型, 不属于用户模拟器的功能~~
-* User State Transition: `$P(S_{t+1} | a_m, S_t^{'})$`, 用户模型在新的对话状态 `$S_t^{'}$` 及 System Action `$a_m$` 下转移到新的状态 `$S_{t+1}$` 的概率
+* Action Selection: $P(a_u | S_t)$, 用户模型在对话状态 $S_t$ 下, 选择 User Action $a_u$ 的概率.
+* System State Transition: $P(S_t^{'} | a_u, S_t)$, 系统模型在对话状态 $S_t$ 及 User Action $a_u$ 下, 转移到新状态 $S_t^{'}$ 的概率
+* ~~$P(a_m | S_t^{'})$ 系统模型, 不属于用户模拟器的功能~~
+* User State Transition: $P(S_{t+1} | a_m, S_t^{'})$, 用户模型在新的对话状态 $S_t^{'}$ 及 System Action $a_m$ 下转移到新的状态 $S_{t+1}$ 的概率
+
+
+> **注意**
+> 这里的 System State Transition 和 User State Transition 是我命名的, 原始论文没有给这两个状态转移模型命名.
+> 说一下这样命名的理由
+> 1. 系统状态转移 $P(S_t^{'} | a_u, S_t)$ 是由 User Action $a_u$ 触发的, 一般地我们认为 User Action 会引起系统状态的变化, 因此命名为 **系统状态转移**;
+> 2. 同理, 用户状态转移  $P(S_{t+1} | a_m, S_t^{'})$ 是由 System Action $a_m$ 触发的, 造成了用户状态的变化, 因此命名为 **用户状态转移**
+
 
 Agenda-based User Simulator 的工作过程如下:
 
 1. 在对话开始时, Simulator 会随机设置 User Goal. 而 User Goal 中的 Constraints 则转换成 **Inform Acts** 压入 Agenda 中, User Goal 中的 Requests 则转换为 **Request Acts** 压入 Agenda 中.
 
-2. 在对话过程中, User Goal 和 Agenda 都会动态更新. Agenda 的顶部元素会用来生成 User Act `$a_u$`; 而系统响应 System Act `$a_m$` 到来时, 新的 User Acts 被压入 Agenda 中, 而不再需要的 User Acts 则从 Agenda 中移除.
+2. 在对话过程中, User Goal 和 Agenda 都会动态更新. Agenda 的顶部元素会用来生成 User Act $a_u$; 而系统响应 System Act $a_m$ 到来时, 新的 User Acts 被压入 Agenda 中, 而不再需要的 User Acts 则从 Agenda 中移除.
 
 
-关于 Simulator 的工作过程, 建议参考文章 [Josh Schatzmann et al, 2017, Agenda-based user simulation for bootstrapping a POMDP dialogue system](https://www.aclweb.org/anthology/N07-2038/) 中的 Figure 1 给出的示例.
+关于 Simulator 的工作过程, 建议参考文章 [Schatzmann et al, 2017, Agenda-based user simulation for bootstrapping a POMDP dialogue system](https://www.aclweb.org/anthology/N07-2038/) 中的 Figure 1 给出的示例.
 
 
 ## User Action Selection Model
 
-User Simulator 的第一个问题是 **User Action Selection**, 即:  `$P(a_u | S_t)$`, 在对话状态 `$S_t$` 下, 选择 User Action `$a_u$` 的概率. 只使用了 Agenda 中最新的 n 个元素参与预测  User Action `$a_u$`, 则问题建模可做如下调整:
+User Simulator 的第一个问题是 **User Action Selection**, 即:  $P(a_u | S_t)$, 在对话状态 $S_t$ 下, 选择 User Action $a_u$ 的概率. 
 
-```math
+如前所述, $S = <A, G>$, 可以将 User Action Selection Model 进行拆分:
+
+$$ 
+P(a_u | S_t) \xlongequal{S_t = <A_t, G_t>} P(a_u | <A_t, G_t>)
+$$
+
+又因为当前 User Action 的选择与当前的 User Goal 没有直接关系 (User Goal 中的信息已经在 Agenda 中体现了), 因此, 问题可以简化为:
+
+$$
 \begin{aligned}
-P(a_u | S_t) &= P(a_u | <A_t, G_t>) \\
-    &= P(a_u | A_t[-n:])
+P(a_u | S_t) & = P(a_u | <A_t, G_t>) \\
+    & = P(a_u | A_t)
 \end{aligned}
-```
+$$
+
+
+我们只使用了 Agenda 中最新的 n 个元素参与预测  User Action $a_u$, 则问题建模可做如下简化:
+
+$$
+\begin{aligned}
+P(a_u | S_t) & = P(a_u | <A_t, G_t>) \\
+    & = P(a_u | A_t) \\
+    &= P(a_u | A_t[-n:]) \\
+    &= \delta (a_u, A_t [-n:])
+\end{aligned}
+$$
 
 
 ## System State Transition Model 
 
-User Simulator 的第二个问题是 **System State Transition**, 即: `$P(S_t^{'} | a_u, S_t)$`, 系统模型在对话状态 `$S_t$` 及 User Action `$a_u$` 下, 转移到新状态 `$S_t^{'}$` 的概率.
+User Simulator 的第二个问题是 **System State Transition**, 即: $P(S_t^{'} | a_u, S_t)$, 系统模型在对话状态 $S_t$ 及 User Action $a_u$ 下, 转移到新状态 $S_t^{'}$ 的概率.
 
-```math
+同样, 我们需要根据 $S = <A, G>$ 对模型进行拆分, 因此:
+
+$$
+P(S_t^{'} | a_u, S_t)  \xlongequal{S_t = <A_t, G_t>} P(<A_t^{'}, G_t^{'}> | a_u, <A_t, G_t>)
+$$
+
+
+同时, 我们假设 Simulator 在执行 User Act 时, 其 User Goal 是不变化的, 即 
+
+$$
+G_t^{'}  \nleftrightarrow a_u
+$$
+
+同时, 根据前述的 User Action Selection 模型可知, User Action $a_u$ 是一个关于 $A_t [-n:]$ 的函数,
+
+因此 System State Transition 可以拆分为:
+
+$$
 \begin{aligned}
 P(S_t^{'} | a_u, S_t) &= P(<A_t^{'}, G_t^{'}> | a_u, <A_t, G_t>) \\
 &= g(A_t^{'}, A_t[-n:]) * f(G_t^{'}, G_t)
 \end{aligned}
-```
+$$
 
-注意, 上述模型分解过程假设 **在执行 User Act 时, User Goal 不变化**.
 
 
 ## User State Transition Model
 
-与 System State Transition Model 类似, User State Transition Model 可以如下分解
+与 System State Transition Model 类似, 遵循如下几个原则
 
-```math
+* $A_t^{'}$ 与 $G_t^{'}$ 没有其它限制
+* 新的 User Goal $G_{t+1}$ 条件独立于 Agenda $A_t{'}$
+* 链式条件概率法则
+
+User State Transition Model 可以如下分解
+
+$$
 \begin{aligned}
 P(S_{t+1} | a_m, S_t^{'}) &= P( <A_{t+1}, G_{t+1}> | a_u, <A_t^{'}, G_t^{'}>) \\
 &= \underbrace{P(A_{t+1} | a_m, A_t^{'}, G_{t+1})}_{\text{agenda update}} * \underbrace{P(G_{t+1} | a_m, G_t^{'})}_{\text{goal update}}
 \end{aligned}
-```
+$$
 
 即 User State Transition Model 可以拆分为 Goal Update Model 和 Agenda Update Model 两部分.
 
 
 **Goal Update Model**
 
-```math
+$$
 \begin{aligned}
 P(G_{t+1} | a_m, G_t^{'}) &= P(<C_{t+1}, R_{t+1}> | a_m, <C_t^{'}, R_t^{'}>) \\
     &= P(R_{t+1} | a_m, R_t^{'}, C_{t+1}) * P(C_{t+1} | a_m, R_t^{'},  C_t^{'})
 \end{aligned}
-```
+$$
 
 
 **Agenda Update Model**
 
-```math
+$$
 \begin{aligned}
 P(A_{t+1} | a_m, A_t^{'}, G_{t+1}) &= P(A_{t+1}[-n:] | a_m, A_t [-n: ], G_{t+1}) \\
  &= P(A_{t+1}[-n:] | a_m, G_{t+1}) * h(A_{t+1}[-n:], A_t[-n:])
 \end{aligned}
-```
+$$

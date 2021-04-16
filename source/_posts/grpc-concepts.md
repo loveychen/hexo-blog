@@ -6,7 +6,6 @@ tags:
     - 源码解析
 categories:
     - 系统架构
-    - 源码解析
 ---
 
 
@@ -1048,4 +1047,3 @@ class Future(six.with_metaclass(abc.ABCMeta)):
 
 
 除了前面提到的 `grpc.Call`  与 `grpc.Future`的共同子类外, `grpc.Future` 还有一个额外的子类 `grpc._utilities._ChannelReadyFuture`, 这个类由 `grpc.channel_ready_future()` 方法暴露给调用方使用.
-

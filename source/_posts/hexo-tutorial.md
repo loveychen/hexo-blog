@@ -1,6 +1,7 @@
 ---
-title: Hello World
-banner_img: /img/banners/hello-world.jpg
+title: Hexo Tutorials
+# banner_img: /img/banners/hello-world.jpg
+date: 2020-10-01
 ---
 
 

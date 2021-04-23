@@ -44,7 +44,15 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+
+# 每个 post 使用单独的同名图片目录
+post_asset_folder: true
+
+# 使用 Markdown 语法链接图片
+marked:
+  prependRoot: true
+  postAsset: true
+
 relative_link: false
 future: true
 

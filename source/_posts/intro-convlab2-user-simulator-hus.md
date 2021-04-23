@@ -132,7 +132,7 @@ HUS 基础模型主要由四部分构成
 其结构如下图所示
 
 <!-- ![HUS-base 结构图](HUS.png "HUS-base 结构图") -->
-<!-- {% asset_path HUS.png "HUS-base 结构图" %} -->
+{% asset_img "HUS.png" "HUS-base 结构图" %}
 
 
 #### 层级编码器 

@@ -78,7 +78,9 @@ TRADE 由 香港科技大学 的 Chien-Sheng Wu et al. 于 2019 年提出, 论�
 * Slot Gate
 * Slot Generator
 
-<!-- ![TRADE 架构图](trade.png) -->
+<!-- 关于在 Hexo 中使用图片, 请参考 https://hexo.io/docs/asset-folders.html -->
+![TRADE 架构图](trade.png)
+<!-- {% asset_img "trade.png" "TRADE 模型结构图" %} -->
 
 
 整体上, 使用了经典的 Encoder-Decoder 架构来实现序列生成模型. 其中 Utterance Encoder 用来编码对话文本信息; Slot Generator 作为 Decoder, 负责槽位值生成. Slot Gate 是一个三分类器, 用于判断是否需要使用生成的值填充该槽位.

@@ -79,7 +79,7 @@ TRADE 由 香港科技大学 的 Chien-Sheng Wu et al. 于 2019 年提出, 论�
 * Slot Generator
 
 <!-- 关于在 Hexo 中使用图片, 请参考 https://hexo.io/docs/asset-folders.html -->
-![TRADE 架构图](trade.png)
+![TRADE 架构图](intro-convlab2-dst-trade/trade.png)
 <!-- {% asset_img "trade.png" "TRADE 模型结构图" %} -->
 
 

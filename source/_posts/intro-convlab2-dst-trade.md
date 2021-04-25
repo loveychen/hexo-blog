@@ -12,6 +12,8 @@ categories:
 ---
 
 对话状态追踪 (Dialogue State Tracking, DST) 是任务型对话系统 (Task-Oriented Dialogue System, TOD) 的核心模块.
+
+
 DST 的目标是 提取用户目标 (User Goal) 和 意图, 并将其编码为 对话状态 (Dialogue State). 所谓 Dialogue State, 是一组 **意图-槽位-槽位值** 组合.
 
 > 在单领域对话系统 (Single-Domain TOD) 中, Dialogue State 可以表示为 `<Intent, Slot, Value>` 组成的集合;
@@ -116,7 +118,7 @@ TRADE 对每一个槽位 `Domain-Slot` 都需要执行一遍解码过程. 我们
 * 当前正在处理的槽位 $(d, s)$
 * 槽位词表 $V_{ds}$ 及 对应的 嵌入矩阵 $E_{ds} \in \mathbb{R}^{|V_{ds}| \times D_{hdd}}$
 * 所有 Token 对应的总词表 $V$ 及 嵌入矩阵 $E \in \mathbb{R}^{|V| \times D_{hdd}}$
-* 仅限训练时: 槽位值目标序列 $T = [v_1, v_2, \cdots, v_N]\in \mathbb{R}^{N}$
+* 仅限训练时: 槽位值目标序列 $T = [v_1, v_2, \cdots, v_N] \in \mathbb{R}^{N} \,$
 
 > **提示**
 > * 槽位词表在构建时, 可以将 d 和 s 分别作为 Token 加入词表中 相对于将 `d-s` 整体作为 Token 可以减小词表体积, 同时方便 d 和 s 的多样组合;
@@ -128,7 +130,7 @@ TRADE 对每一个槽位 `Domain-Slot` 都需要执行一遍解码过程. 我们
 1. 获得 $(d, s)$ 的嵌入向量 $e_{ds} \in \mathbb{R}^{1 \times D_{hdd}}$
 2. GRU 初始状态设置为编码器的输出状态 $h_0 = H$
 3. 解码 Token $v_k$
-   1. 使用 Token $v_{k-1}$ 对应的嵌入向量 $e_{k-1} \in \mathbb{R}^{1 \times D_{hdd}}$ 作为 GRU 的输入; 当 $k=0$ 时, $e_{k-1} = e_{ds}$
+   1. 使用 Token $v_{k-1}$ 对应的嵌入向量 $e_{k-1} \in \mathbb{R}^{1 \times D_{hdd}}$ 作为 GRU 的输入. 特别地, 当 $k=0$ 时, $e_{k-1} = e_{ds} \,$
    
    2. 使用 GRU 解码, 得到隐状态 
     $$
@@ -150,12 +152,12 @@ TRADE 对每一个槽位 `Domain-Slot` 都需要执行一遍解码过程. 我们
     p_{vk} = \text{Attention} (E, h_k) \in \mathbb{R}^{|V|}
     $$
 
-   6. 计算权重因子 $\gamma_{k} \in \mathbb{R}$
+   6. 计算权重因子 $\gamma_{k} \in \mathbb{R} \,$
     $$
     \gamma_{k} = \text{FC} ([s_k; c_k; e_{k-1}])
     $$
 
-   7. 加权 $p_{ck}$ 和 $p_{vk}$, 得到 $v_k$ 的概率分布 $p_{k} \in \mathbb{R}^{|V|}$
+   7. 加权 $p_{ck}$ 和 $p_{vk}$, 得到 $v_k$ 的概率分布 ${p_{k} \in \mathbb{R}^{|V|}}$
     $$
     p_{k} = (1 - \gamma_{k} ) * p_{ck} + \gamma_{k} * p_{vk}
     $$
@@ -184,6 +186,31 @@ g_{ds} = \text{Softmax} (\text{FC} (c_0)) \in \mathbb{R}^{3}
 $$
 
 
+
+## Zero-shot / Few-shot DST 
+
+
+先回忆一下 TRADE 解码器的输入数据:
+
+* 编码器输出序列编码 $S \in \mathbb{R}^{M \times D_{hdd}}$ 及 隐状态 $H \in \mathbb{R}^{D_{hdd}}$
+* 当前正在处理的槽位 $(d, s)$
+* 槽位词表 $V_{ds}$ 及 对应的 嵌入矩阵 $E_{ds} \in \mathbb{R}^{|V_{ds}| \times D_{hdd}}$
+* 所有 Token 对应的总词表 $V$ 及 嵌入矩阵 $E \in \mathbb{R}^{|V| \times D_{hdd}}$
+* 仅限训练时: 槽位值目标序列: $T = [v_1, v_2, \cdots, v_N] \in \mathbb{R}^{N} \,$
+
+在 Zero-shot 场景下, 目标 Domain 和/或 Slot 在训练数据未曾出现过, 因此无法获得 $(d, s)$ 对应的嵌入向量. 这种情况下的 DST 是非常困难的.
+
+在 Few-shot 场景下, 可以认为槽位词表 $V_{ds}$ 是完备的, 只不过对于新的 Domain 和 Slot, 其嵌入向量是欠学习的.
+
+Few-shot 场景常用的学习方法是 **持续学习 (Continual Learning)**.
+
+论文采用了两种持续学习方法来 Fine-tune 模型:
+
+* EWC (Elastic Weight Consolidation): [Overcoming catastrophic forgetting in neural networks](http://arxiv.org/abs/1612.00796), Kirkpatrick et al, 2017
+* GEM (Gradient Episodic Memory): [Episodic memory for continual model learning](http://arxiv.org/abs/1712.01169), Nagy et al, 2017
+
+
+关于持续学习, 我们将在后续的博客中再进行介绍.
 
 # ConvLab2 实现
 

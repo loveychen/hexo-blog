@@ -95,7 +95,7 @@ $$
 \begin{aligned}
 e_{ij} &= a(s_{i-1}, h_j) \\
 \alpha_{ij} &= \text{Softmax}(e_{ij}) \\
-c_i &= \sum{j=1}^{T_x} \alpha_{ij} h_j
+c_i &= \sum_{j=1}^{T_x} \alpha_{ij} h_j
 \end{aligned}
 $$
 

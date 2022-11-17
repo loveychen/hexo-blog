@@ -1,5 +1,5 @@
 ---
-title: "logit、logic、logistic 傻傻分不清楚"
+title: "从 Logistic Regression 谈起: logit、logic、logistic 傻傻分不清楚"
 tags: 
     - Probability
     - Mathematics
@@ -10,11 +10,109 @@ categories:
     - Probability
 ---
 
-在看 逻辑回归 (Logistic Regression, LR) 时, 对 "逻辑" 一词不甚理解, 该词的中文翻译也词不达意.
+逻辑回归 (Logistic Regression, LR) 是一种经典的机器学习模型, 在很多机器学习任务(比如广告推荐, 推荐排序等), 都可以作为 baseline 模型使用.
 
-事实上, `logistic` 与 `logic` 及 `logit` 是同根词, 而 `logit` 是 LR 中的重要概念.
 
-**TODO: 这里需要搜集和整理资料, 给一个让人深刻的引入和简介**
+从名字上看, LR 包含 Logistic 和 Regression 两个单词, 其中
+* Logistic 源自 Logistic Distribution, LR 中使用 Logistic 分布建模分类概率
+* Regression 源自 Linear Regression, LR 中的采用了回归的思路来建模分类问题
+
+因此, LR 的两个单词完全概括了它的两个组成部分: 使用线性回归模型将特征转换成一个实数, 然后实用逻辑分布将该实数转换为分类概率. 
+
+
+看到这里, 你是不是会想: 又有人要来水逻辑回归的博文了 ...
+
+
+先别忙下结论, 逻辑回归只是我们这篇文章的引子, 我们在这篇文章中主要聊一聊 "逻辑" 这个词的前世今生.
+
+
+# 逻辑回归中的“逻辑”
+
+逻辑回归中有两个地方跟“逻辑“挂钩， 前面已经提到了逻辑分布（the Logistic Distribution）。
+
+另一个地方是 logit。逻辑回归中的线性模型部分就是在建模事件发生的 logit.
+
+logit 一般翻译为 ”对数比， 对数几率“。1944年 Joseph Berkson 在创造这个术语时，恐怕同时受到了 对数（logarithm） 和 逻辑函数 的双从影响。
+不管怎样，logit、logistic、logarith 应该都跟 logic 是同根词，大家都源自词根 [log-](https://membean.com/roots/log-word)。
+
+从数学上讲，概率 p 的 logit 是 odds 的对数。 odds 一般翻译为 ”几率", 它的英文解释是 "the probability (= how likely it is) that a particular thing will or will not happen",
+即 一个事件发生和不发生的比率。 不过英文解释中的 probability 是不满足数学上的概率解释的，因为 odds 不满足取值在 `[0, 1]` 上这个条件限制.
+
+我们用数学语言重新描述一下上面的解释。对于二分类任务，LR 将样本 $\boldsymbol{x}$ 被划分为正类的概率建模如下：
+
+$$
+P(Y=1|\boldsymbol{x}) = \frac{1}{1 + e^{-\boldsymbol{Wx}}}
+$$
+
+其中 $\boldsymbol{W}$ 是需要学习的参数. 这里用到了 Logistic Function，是 LR 中 Logistic 一词的由来。
+
+
+该样本被划分为正类的 odds 则可以表示如下:
+
+$$
+\begin{aligned}
+\text{odds} (\boldsymbol{x}) &= \frac{P(Y=1| \boldsymbol{x})}{P(Y=0|\boldsymbol{x})} \\
+               &= e^{\boldsymbol{Wx}}
+\end{aligned}
+$$
+
+因此其 logit 为:
+
+$$
+\begin{aligned}
+\text{logit}(\boldsymbol{x}) &= \log \text{odds} (\boldsymbol{x}) \\
+                             &= \boldsymbol{Wx}
+\end{aligned}
+$$
+
+logit 最终可以表示成样本特征的线性回归（Linear Regression）模型，这是 LR 中 Regression 一词的由来。
+
+
+在后面的章节中，我会详细介绍 LR 中各种 ”逻辑“ 的详细的来龙去脉。
+
+
+# "逻辑" 词源
+
+首先看一下 "逻辑" 这个中文词的来源。
+
+中文词 "逻辑" 是一个外来词, 由中国清末翻译家严复先生所创, 它是对英文词 **logic** 的音译. 
+
+"逻辑"一词后由中国传入日本, ロジック；论理（ろんり）, 但在日语中则注明只是对Logic的注音，Logic在日语中的正式汉语翻译词为“论理”。
+
+logic 还有一个很好的意译："理则"，这是由孙中山先生所译。孙中山先生[《建国方略.以作文为证》](http://www.sunyat-sen.org/index.php?m=content&c=index&a=show&catid=46&id=6662)：“然则逻辑究为何物？当译以何名而后妥……吾以为当译之为‘理则’者也。”孙中山《建国方略·以作文为证》：“学者之对于理则之学，则大都如陶渊明之读书，不求甚解而已。”
+
+"逻辑" 有四种常见含义:
+1. 指客观事物的规律。例如：“历史的逻辑决定了人类社会讲一直向前发展”
+2. 指某种特殊的理论、观点或看问题的方法。例如：“侵略者奉行的是强盗逻辑”
+3. 指思维的规律、规则。例如：“写文章要讲逻辑”
+4. 指逻辑学这门科学。例如：“大学生要学点逻辑”
+
+
+# logic 的含义
+
+前面讲到，中文词 ”逻辑“ 是英文单词 ”logic“ 的音译。 我们再详细探究一下英文词 ”logic“ 的来源。
+
+
+柯林斯词典对 logic 给出了三个解释:
+
+*  **Logic** is a method of reasoning that involves **a series of statements**, each of which must be true if the statement before it is true. 逻辑 (学)
+*  The **logic** of a conclusion or an argument is **its quality of being correct and reasonable**. (结论或观点的) 逻辑
+   *  eg. I don't follow the logic of your argument.
+*  A particular kind of **logic** is the way of thinking and reasoning about things that is characteristic of a particular type of person or particular field of activity. (某种人或某行为领域的) 逻辑
+   *  eg. The plan was based on sound commercial logic.  (商业逻辑)
+
+
+logic 从词源上看,
+> * mid-14c., **logike**, "branch of philosophy that treats of forms of thinking; the science of distinction of true from false reasoning," 
+> * from Old French **logique** (13c.), 
+> * from Latin **(ars)logica** "logic," 
+> * from Greek **(he)logike (techne)**  "(the) reasoning (art)," 
+> * from fem. of **logikos** "pertaining to speaking or reasoning" (also "of or pertaining to speech"), 
+> * from **logos** "reason, idea, word" (see Logos). 
+> * Formerly also **logick**. 
+> 
+> Sometimes formerly plural, as in ethics, but this is not usual. 
+> * Meaning "logical argumentation" is from c. 1600. Contemptuous logic-chopper "sophist, person who uses subtle distinctions in argument" is from 1846.
 
 
 
@@ -22,13 +120,12 @@ categories:
 
 此处主要参考 [Wikipedia: Logistic function](https://en.wikipedia.org/wiki/Logistic_function).
 
-Logistic 函数是比利时数学家 [Pierre François Verhulst](https://en.wikipedia.org/wiki/Pierre_Fran%C3%A7ois_Verhulst)
-在 1938 ~ 1947 的三篇论文中提出的, 其目的是通过调整指数增长模型, 对人口增长函数进行建模.
+Logistic Function 是比利时数学家 [Pierre François Verhulst](https://en.wikipedia.org/wiki/Pierre_Fran%C3%A7ois_Verhulst)在 1938 ~ 1947 的三篇论文中提出的, 其目的是通过调整指数增长模型, 对人口增长函数进行建模.
 
 作者在 30 年代设计了该函数, 并与 1938 年发表了一个简短说明; 1944年进一步分析了该函数, 并给出正式命名 (对应论文则是 1845 年发表的).
 
 > **Logistic 名字来源**
-> Verhulst 在1945年发表的论文中将该曲线命名为 **logistic**, 但是并没有解释原因. 这大概是一个数学领域的不解之谜吧.
+> Verhulst 在1945年发表的论文中将该曲线命名为 **logistic**, 但是并没有解释原因. Verhulst 也太不讲逻辑了 (a pun) !
 > 参考 [Quora: How did "logistic equation" get its name?](https://www.quora.com/How-did-a-%E2%80%9Clogistic-equation%E2%80%9D-get-its-name-Does-logistic-mean-logical-or-logistic-work)
 
 
@@ -97,30 +194,7 @@ logistic 从构词上看, `log- + -istic`, 由词根 `log-` (表示 "说话", �
 * genealogy: "study" of one's family history, 家谱(学), 宗谱(学)
 
 
-### logic
-
-柯林斯词典对 logic 给出了三个解释:
-
-*  **Logic** is a method of reasoning that involves **a series of statements**, each of which must be true if the statement before it is true. 逻辑 (学)
-*  The **logic** of a conclusion or an argument is **its quality of being correct and reasonable**. (结论或观点的) 逻辑
-   *  eg. I don't follow the logic of your argument.
-*  A particular kind of **logic** is the way of thinking and reasoning about things that is characteristic of a particular type of person or particular field of activity. (某种人或某行为领域的) 逻辑
-   *  eg. The plan was based on sound commercial logic.  (商业逻辑)
-
-
 logic 虽然与 logistic 属于同根词, 但是其相对于词根 `log-` 的本意已经相去甚远了.
-
-logic 从词源上看,
-> * mid-14c., **logike**, "branch of philosophy that treats of forms of thinking; the science of distinction of true from false reasoning," 
-> * from Old French **logique** (13c.), 
-> * from Latin **(ars)logica** "logic," 
-> * from Greek **(he)logike (techne)**  "(the) reasoning (art)," 
-> * from fem. of **logikos** "pertaining to speaking or reasoning" (also "of or pertaining to speech"), 
-> * from **logos** "reason, idea, word" (see Logos). 
-> * Formerly also **logick**. 
-> 
-> Sometimes formerly plural, as in ethics, but this is not usual. 
-> * Meaning "logical argumentation" is from c. 1600. Contemptuous logic-chopper "sophist, person who uses subtle distinctions in argument" is from 1846.
 
 
 ### logit
@@ -174,21 +248,6 @@ logistics 从词源上看
 现代的“物流”概念最早可能是以在二战中，围绕战争物资供应，美军创建的后勤理论为原型的。当时的「后勤」是指将战时物资生产、采购、运输、配给等活动作为一个整体进行统一布置，以求战略物资补给的费用更低、速度更快、服务更好。后来，将“后勤”体系移植到现代经济生活中，才逐步演变为今天的物流。物流系统也可像互联网般，促进全球化。在贸易上，若要更进一步与世界连系，就得靠良好的物流管理系统。
 
 市场上的商品很多是「游历」各国后才来到的。原料可能来自马来西亚和泰国，加工可能在新加坡，生产却在中国，最后才入口到美国。产品的「游历」路线就是由物流师计划、组织、指挥、协调、控制和监督，使各项物流活动实现最佳的协调与配合，以实现产品物流的目标，目标可能是：降低物流成本（cost），提高物流效率及质量（efficiency & quality），或提高物流的供应满足性（availability）。目标可能会有取舍和侧重。
-
-
-### "逻辑" 词源
-
-中文词 "逻辑" 是一个外来词, 由中国清末翻译家严复先生所创, 它是对英文词 **logic** 的音译. 
-
-"逻辑"一词后由中国传入日本, ロジック；论理（ろんり）, 但在日语中则注明只是对Logic的注音，Logic在日语中的正式汉语翻译词为“论理”。
-
-logic 还有一个很好的意译："理则"，这是由孙中山先生所译。孙中山先生[《建国方略.以作文为证》](http://www.sunyat-sen.org/index.php?m=content&c=index&a=show&catid=46&id=6662)：“然则逻辑究为何物？当译以何名而后妥……吾以为当译之为‘理则’者也。”孙中山《建国方略·以作文为证》：“学者之对于理则之学，则大都如陶渊明之读书，不求甚解而已。”
-
-"逻辑" 有四种常见含义:
-1. 指客观事物的规律。例如：“历史的逻辑决定了人类社会讲一直向前发展”
-2. 指某种特殊的理论、观点或看问题的方法。例如：“侵略者奉行的是强盗逻辑”
-3. 指思维的规律、规则。例如：“写文章要讲逻辑”
-4. 指逻辑学这门科学。例如：“大学生要学点逻辑”
 
 
 # Logistic 分布

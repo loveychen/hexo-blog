@@ -260,12 +260,11 @@ Logistic 有个复数名词形式: logistics, 其英文含义是 "the careful or
 > 6. **日本流行文化引进的和制汉语**，如 声优、女优、攻略、暴走、援交、人气等
 >
 > 更多信息可以参考 [汉语中的日语借词](https://zh.wikipedia.org/zh-sg/%E6%BC%A2%E8%AA%9E%E4%B8%AD%E7%9A%84%E6%97%A5%E8%AA%9E%E5%80%9F%E8%A9%9E) 以及 [知乎: 日语借词为何在现代汉语中大行其道](https://zhuanlan.zhihu.com/p/419407308).
- 
-
-以下内容来自 [英文维基百科: Logistics](https://en.wikipedia.org/wiki/Logistics) 和 [中文维基百科: 物流](https://zh.wikipedia.org/wiki/%E7%89%A9%E6%B5%81).
 
 
 ### “物流” 中的 “逻辑”
+
+以下内容来自 [英文维基百科: Logistics](https://en.wikipedia.org/wiki/Logistics) 和 [中文维基百科: 物流](https://zh.wikipedia.org/wiki/%E7%89%A9%E6%B5%81).
 
 **物流（英语：Logistics）**，是军事领域后勤概念的民间用语。
 

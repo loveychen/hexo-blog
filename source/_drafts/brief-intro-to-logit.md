@@ -51,7 +51,7 @@ $$
 
 $$
 \begin{aligned}
-\text{odds} (\boldsymbol{x}) &= \frac{P(Y=1| \boldsymbol{x})}{P(Y=0|\boldsymbol{x})} \\
+\text{odds} P(Y=1|\boldsymbol{x}) &= \frac{P(Y=1| \boldsymbol{x})}{P(Y=0|\boldsymbol{x})} \\
                &= e^{\boldsymbol{Wx}}
 \end{aligned}
 $$
@@ -60,7 +60,7 @@ $$
 
 $$
 \begin{aligned}
-\text{logit}(\boldsymbol{x}) &= \log \text{odds} (\boldsymbol{x}) \\
+\text{logit} P(Y=1|\boldsymbol{x}) &= \log \text{odds}  P(Y=1|\boldsymbol{x}) \\
                              &= \boldsymbol{Wx}
 \end{aligned}
 $$

@@ -35,7 +35,7 @@ categories:
 logit 一般翻译为 ”对数比， 对数几率“。1944年 Joseph Berkson 在创造这个术语时，恐怕同时受到了 logarithm (对数) 和 logistic function (逻辑函数) 的双重影响。
 不管怎样，logit、logistic、logarith 应该都跟 logic 是同根词，大家都源自词根 [log-](https://membean.com/roots/log-word)。
 
-从数学上讲，概率 p 的 logit 是其 odds 的对数。 odds 一般翻译为 ”几率", 它的英文解释是 "the probability (= how likely it is) that a particular thing will or will not happen",即 一个事件发生和不发生的比率。 
+从数学上讲，$x$ 被预测为正类 的 logit 是其 odds 的对数。 odds 一般翻译为 ”几率", 它的英文解释是 "the probability (= how likely it is) that a particular thing will or will not happen",即 一个事件发生和不发生的比率。 
 不过英文解释中的 probability 并不满足 probability 在数学上的定义，因为 odds 值域是非负实数域 $\displaystyle \mathbf{R}^{*}$, 而不是 `[0, 1]` 这个闭区间.
 
 我们用数学语言重新描述一下上面的解释。对于二分类任务，LR 将样本 $\boldsymbol{x}$ 被划分为正类的概率建模如下：
@@ -82,7 +82,7 @@ logit 最终可以表示成样本特征 $\boldsymbol{x}$ 的线性回归（Linea
 logic 还有一个很好的意译："理则"，这是由孙中山先生所译。孙中山先生[《建国方略.以作文为证》](http://www.sunyat-sen.org/index.php?m=content&c=index&a=show&catid=46&id=6662)中：“然则逻辑究为何物？当译以何名而后妥……吾以为当译之为‘理则’者也……学者之对于理则之学，则大都如陶渊明之读书，不求甚解而已。”
 
 现代汉语中，"逻辑" 有四种常见含义:
-1. 指客观事物的规律。例如：“历史的逻辑决定了人类社会讲一直向前发展”
+1. 指客观事物的规律。例如：“历史的逻辑决定了人类社会将一直向前发展”
 2. 指某种特殊的理论、观点或看问题的方法。例如：“侵略者奉行的是强盗逻辑”
 3. 指思维的规律、规则。例如：“写文章要讲逻辑”
 4. 指逻辑学这门科学。例如：“大学生要学点逻辑”
@@ -120,7 +120,7 @@ logic 从词源上看,
 
 此处主要参考 [Wikipedia: Logistic function](https://en.wikipedia.org/wiki/Logistic_function).
 
-Logistic Function 是比利时数学家 [Pierre François Verhulst](https://en.wikipedia.org/wiki/Pierre_Fran%C3%A7ois_Verhulst)在 1938 ~ 1947 的三篇论文中提出的, 其目的是通过调整指数增长模型, 对人口增长函数进行建模. Logistic 很好的解释了人口增长模型的三个阶段:
+Logistic Function 是比利时数学家 [Pierre François Verhulst](https://en.wikipedia.org/wiki/Pierre_Fran%C3%A7ois_Verhulst)在 1838 ~ 1847 的三篇论文中提出的, 其目的是通过调整指数增长模型, 对人口增长函数进行建模. Logistic 很好的解释了人口增长模型的三个阶段:
 - 指数增长阶段: 在初始阶段, 人口呈现几何增长趋势
 - 线性增长阶段: 随着逐渐饱和, 增长曲线放缓至线性增长
 - 滞胀阶段: 在成熟阶段, 人口停止增长
@@ -128,10 +128,10 @@ Logistic Function 是比利时数学家 [Pierre François Verhulst](https://en.w
 你可以从 Logistic 函数的函数图像上获得更直观的感受.
 
 
-Verhulst 在 30 年代设计了该函数, 并于 1938 年发表了一个简短说明; 1944年进一步分析了该函数, 并给出正式命名 (对应论文则是 1845 年发表的).
+Verhulst 在 30 年代设计了该函数, 并于 1838 年发表了一个简短说明; 1844年进一步分析了该函数, 并给出正式命名 (对应论文则是 1845 年发表的).
 
 > **Logistic 函数名字由来**
-> Verhulst 在1945年发表的论文中将该曲线命名为 **logistic**, 但是并没有解释原因. 从这一点上看,Verhulst 实在不讲逻辑了 (a pun) !
+> Verhulst 在1845年发表的论文中将该曲线命名为 **logistic**, 但是并没有解释原因. 从这一点上看,Verhulst 实在不讲逻辑了 (a pun) !
 > 参考 [Quora: How did "logistic equation" get its name?](https://www.quora.com/How-did-a-%E2%80%9Clogistic-equation%E2%80%9D-get-its-name-Does-logistic-mean-logical-or-logistic-work)
 
 

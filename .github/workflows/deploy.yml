@@ -8,10 +8,6 @@ on:
 env:
   GIT_USER: loveychen
   GIT_EMAIL: loveychen@live.com
-  # THEME_REPO: LouisBarranqueiro/hexo-theme-tranquilpeak
-  # THEME_BRANCH: master
-  # 环境变量内部不能相互引用, 参考 https://github.community/t/how-to-use-env-context/16975/2
-  # DEPLOY_REPO: ${{ env.GIT_USER }}/${{ env.GIT_USER }}.github.io
   DEPLOY_REPO: loveychen/loveychen.github.io.git
   DEPLOY_BRANCH: main
 
@@ -22,7 +18,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node_version: [23.x]
+        node_version: [18.x, 20.x] # 使用稳定版本
 
     steps:
       - name: Checkout
@@ -47,12 +43,28 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.name $GIT_USER
           git config --global user.email $GIT_EMAIL
-          # cp _config.theme.yml themes/tranquilpeak/_config.yml
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node_modules
 
       - name: Install dependencies
         run: |
           npm install
+          npm install clean-css --save
+
+      - name: Install theme dependencies
+        run: |
+          cd themes/kaze
+          npm install
+          cd ../../
 
       - name: Deploy hexo
         run: |
-          npm run deploy
+          npx hexo clean
+          npx hexo generate
+          npx hexo deploy

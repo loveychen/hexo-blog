@@ -56,20 +56,20 @@ marked:
 relative_link: false
 future: true
 
-# hightlight_theme: night bright
-highlight:
-  enable: false
-  line_number: true
-  auto_detect: false
-  tab_replace: ""
-  wrap: true
-  hljs: false
+# # hightlight_theme: night bright
+# highlight:
+#   enable: false
+#   line_number: true
+#   auto_detect: false
+#   tab_replace: ""
+#   wrap: true
+#   hljs: false
 
-prismjs:
-  enable: true
-  preprocess: true
-  line_number: true
-  tab_replace: ""
+# prismjs:
+#   enable: true
+#   preprocess: true
+#   line_number: true
+#   tab_replace: ""
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -148,4 +148,16 @@ markdown:
     lazyload: false
     prepend_root: false
     post_asset: false
-  inline: false # https://markdown-it.github.io/markdown-it/#MarkdownIt.renderInline
+  inline: false
+
+# 参考 https://github.com/Pcrab/hexo-highlight-shiki
+# 参考自 hexo 官网 https://hexo.io/docs/syntax-highlight
+syntax_highlighter: "shiki"
+highlight: false
+prismjs: false
+
+# 主题配置参考 https://shiki.style/themes
+shiki:
+  themes:
+    dark: "everforest-dark"
+    light: "everforest-light"

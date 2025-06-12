@@ -57,7 +57,12 @@ options:
 
 当我们看到类似如下的信息后，表明模型服务启动完成，我们可以访问 `localhost:8000/docs` 端口查看模型提供的接口及其相关文档。
 
+<details>
+<summary>模型服务启动成功日志如下：</summary>
+
 ![vllm-serve-startup-logs](vllm-serve.png)
+
+</details>
 
 我们在启动模型时没有特殊设置模型名称，因此 chat 等模型服务接口的 model 参数与模型名称保持一致即可（上述示例中为 `Qwen/Qwen2.5-0.5B-Instruct`）；我们也可以调用 models 接口查看当前提供服务的模型信息，如下：~
 
@@ -68,7 +73,7 @@ curl http://localhost:8000/v1/models
 <details>
 <summary>`curl http://localhost:8000/v1/models` 输出结果如下：</summary>
 
-```JSON
+```json
 {
   "object": "list",
   "data": [

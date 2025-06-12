@@ -12,6 +12,7 @@
     "version": "7.3.0"
   },
   "dependencies": {
+    "@renbaoshuo/markdown-it-katex": "^2.0.2",
     "acorn-walk": "^8.2.0",
     "hexo": "^7.3.0",
     "hexo-asset-link": "^2.2.1",

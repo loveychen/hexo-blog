@@ -1,13 +1,15 @@
 {
-	"folders": [
-		{
-			"path": ".",
-			"name": "loveychen.github.io"
-		},
-		{
-			"path": "themes/kaze",
-			"name": "hexo-kaze-theme"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": ".",
+      "name": "loveychen.github.io"
+    },
+    {
+      "path": "themes/kaze",
+      "name": "hexo-kaze-theme"
+    }
+  ],
+  "settings": {
+    "cSpell.words": ["VLLM"]
+  }
 }

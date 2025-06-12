@@ -10,7 +10,6 @@ env:
   GIT_EMAIL: loveychen@live.com
   DEPLOY_REPO: loveychen/loveychen.github.io.git
   DEPLOY_BRANCH: main
-  HEXO_DEPLOY_PRI: ${{secrets.HEXO_DEPLOY_PRI}}
 
 jobs:
   build:
@@ -52,13 +51,13 @@ jobs:
           npm install
           cd ../../
 
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.1
+        with:
+          ssh-private-key: ${{ secrets.HEXO_DEPLOY_PRI }}
+
       - name: Deploy hexo
         run: |
-          sudo timedatectl set-timezone "Asia/Shanghai"
-          mkdir -p ~/.ssh/
-          echo "$HEXO_DEPLOY_PRI" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.name $GIT_USER
           git config --global user.email $GIT_EMAIL
           npx hexo clean

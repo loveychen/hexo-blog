@@ -1,4 +1,0 @@
-[submodule "themes/kaze"]
-	path = themes/kaze
-	url = https://github.com/loveychen/hexo-theme-kaze.git
-	branch = master

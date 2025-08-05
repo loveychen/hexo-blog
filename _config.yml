@@ -161,3 +161,11 @@ shiki:
   themes:
     dark: "everforest-dark"
     light: "everforest-light"
+
+mermaid:
+  enable: true # 必须为 true
+  version: "10.6.1" # 版本号正确
+  cdn: "https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js" # 手动指定 CDN（关键！）
+  options:
+    theme: "default"
+    startOnLoad: true # 自动渲染

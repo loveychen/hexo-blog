@@ -13,10 +13,13 @@
   },
   "dependencies": {
     "@renbaoshuo/markdown-it-katex": "^2.0.2",
-    "acorn-walk": "^8.2.0",
+    "acorn-walk": "^8.3.4",
+    "chalk": "^3.0.0",
+    "clean-css": "^5.3.3",
     "hexo": "^7.3.0",
-    "hexo-asset-link": "^2.2.1",
+    "hexo-asset-link": "^2.2.3",
     "hexo-deployer-git": "^4.0.0",
+    "hexo-filter-mermaid-diagrams": "^1.0.5",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
     "hexo-generator-feed": "^3.0.0",
@@ -30,5 +33,20 @@
     "hexo-server": "^3.0.0",
     "hexo-theme-landscape": "^1.1.0",
     "html-minifier": "^4.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.1",
+    "@types/node": "^24.2.0",
+    "eslint": "^9.15.0",
+    "eslint-plugin-lodash-template": "^1.1.0",
+    "gulp": "^5.0.0",
+    "gulp-eslint": "^6.0.0",
+    "gulp-shell": "^0.8.0",
+    "rollup": "^4.27.3",
+    "tslib": "^2.2.0",
+    "typescript": "^5.6.3"
   }
 }

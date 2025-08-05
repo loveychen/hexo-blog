@@ -1,0 +1,53 @@
+{
+  "name": "hexo-theme-kaze",
+  "version": "1.1.0-beta6",
+  "description": "hexo-theme-kaze",
+  "scripts": {
+    "lint": "eslint **/*.ejs --fix",
+    "source:js": "rollup -c ./src/scripts/rollup.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theme-kaze/hexo-theme-Kaze.git"
+  },
+  "keywords": [
+    "hexo",
+    "theme",
+    "Kaze"
+  ],
+  "author": "theme-kaze",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/theme-kaze/hexo-theme-Kaze/issues"
+  },
+  "homepage": "https://demo.theme-kaze.top/",
+  "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-typescript": "^12.1.1",
+    "eslint": "^9.15.0",
+    "eslint-plugin-lodash-template": "^1.1.0",
+    "gulp": "^5.0.0",
+    "gulp-eslint": "^6.0.0",
+    "gulp-shell": "^0.8.0",
+    "rollup": "^4.27.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "tslib": "^2.2.0",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "clean-css": "^5.3.3",
+    "html-minifier": "^4.0.0"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "languages",
+    "layout",
+    "scripts",
+    "source",
+    "_config.yml",
+    "_vendors.yml"
+  ]
+}

@@ -1,0 +1,158 @@
+/* 基础样式：统一图表内外边距和背景 */
+.mermaid {
+  margin: 1.5rem 0; /* 上下留白 */
+  padding: 1.2rem; /* 内部间距 */
+  border-radius: 8px; /* 圆角 */
+  transition: background-color 0.3s ease; /* 模式切换时平滑过渡 */
+  background-color: #f8fafc; /* 浅灰背景 */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 轻微阴影 */
+  color: #333;
+}
+
+/* 浅色模式样式 */
+[data-user-color-scheme="light"] .mermaid,
+body:not([data-user-color-scheme="dark"]) .mermaid {
+  background-color: #f8fafc; /* 浅灰背景 */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 轻微阴影 */
+  color: #333;
+}
+
+[data-user-color-scheme="light"] .mermaid .node rect,
+[data-user-color-scheme="light"] .mermaid .node circle,
+[data-user-color-scheme="light"] .mermaid .node ellipse,
+[data-user-color-scheme="light"] .mermaid .node polygon,
+[data-user-color-scheme="light"] .mermaid .node path,
+body:not([data-user-color-scheme="dark"]) .mermaid .node rect,
+body:not([data-user-color-scheme="dark"]) .mermaid .node circle,
+body:not([data-user-color-scheme="dark"]) .mermaid .node ellipse,
+body:not([data-user-color-scheme="dark"]) .mermaid .node polygon,
+body:not([data-user-color-scheme="dark"]) .mermaid .node path {
+  rx: 4px; /* 节点圆角 */
+  ry: 4px;
+  fill: #fff;
+  stroke: #ccc;
+}
+
+[data-user-color-scheme="light"] .mermaid .node .label,
+body:not([data-user-color-scheme="dark"]) .mermaid .node .label {
+  color: #333;
+  fill: #333;
+}
+
+[data-user-color-scheme="light"] .mermaid .edgePath path,
+body:not([data-user-color-scheme="dark"]) .mermaid .edgePath path {
+  stroke: #555;
+}
+
+[data-user-color-scheme="light"] .mermaid .edgeLabel,
+body:not([data-user-color-scheme="dark"]) .mermaid .edgeLabel {
+  background-color: #fff;
+  color: #333;
+  fill: #333;
+}
+
+/* 深色模式样式 */
+[data-user-color-scheme="dark"] .mermaid {
+  background-color: #1e293b; /* 深灰背景 */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* 深色阴影 */
+  color: #e2e8f0;
+}
+
+/* 深色模式下文本和线条对比度增强 */
+[data-user-color-scheme="dark"] .mermaid .node rect,
+[data-user-color-scheme="dark"] .mermaid .node circle,
+[data-user-color-scheme="dark"] .mermaid .node ellipse,
+[data-user-color-scheme="dark"] .mermaid .node polygon,
+[data-user-color-scheme="dark"] .mermaid .node path {
+  fill: #2d3748;
+  stroke: #666;
+}
+
+[data-user-color-scheme="dark"] .mermaid .node .label {
+  color: #e2e8f0;
+  fill: #e2e8f0;
+}
+
+[data-user-color-scheme="dark"] .mermaid .edgePath path {
+  stroke: #94a3b8;
+}
+
+[data-user-color-scheme="dark"] .mermaid .edgeLabel {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  fill: #e2e8f0;
+}
+
+/* 响应式调整：小屏幕适配 */
+@media (max-width: 768px) {
+  .mermaid {
+    padding: 0.8rem;
+    overflow-x: auto; /* 图表过宽时可横向滚动 */
+  }
+}
+
+/* 其他 mermaid 图表元素样式 */
+.mermaid .actor {
+  stroke: #ccc;
+  fill: #fff;
+}
+
+.mermaid .text.actor>tspan {
+  fill: #333;
+  stroke: none;
+}
+
+.mermaid .messageText {
+  fill: #333;
+  stroke: none;
+}
+
+.mermaid .messageLine0,
+.mermaid .messageLine1 {
+  stroke: #333;
+  stroke-width: 1.5;
+}
+
+.mermaid .activityRect {
+  fill: #fff;
+  stroke: #ccc;
+}
+
+.mermaid .activityText {
+  fill: #333;
+}
+
+.mermaid .activityLine {
+  stroke: #333;
+}
+
+[data-user-color-scheme="dark"] .mermaid .actor {
+  stroke: #666;
+  fill: #2d3748;
+}
+
+[data-user-color-scheme="dark"] .mermaid .text.actor>tspan {
+  fill: #e2e8f0;
+}
+
+[data-user-color-scheme="dark"] .mermaid .messageText {
+  fill: #e2e8f0;
+}
+
+[data-user-color-scheme="dark"] .mermaid .messageLine0,
+[data-user-color-scheme="dark"] .mermaid .messageLine1 {
+  stroke: #94a3b8;
+}
+
+[data-user-color-scheme="dark"] .mermaid .activityRect {
+  fill: #2d3748;
+  stroke: #666;
+}
+
+[data-user-color-scheme="dark"] .mermaid .activityText {
+  fill: #e2e8f0;
+}
+
+[data-user-color-scheme="dark"] .mermaid .activityLine {
+  stroke: #94a3b8;
+}

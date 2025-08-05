@@ -1,0 +1,150 @@
+@import 'postlist.styl'
+
+// layout into two columns
+.columns
+  display: flex
+  padding: 0.5rem 0.25rem
+  position: relative
+
+.main-column
+  content-visibility: auto
+  flex: 1
+  padding: 0.5rem 0.25rem
+
+.left-column
+  .sticky-tablet > div
+    margin-bottom: 0.8rem
+
+// Sidebar toggle buttons
+.sidebar-toggle
+  position: fixed
+  top: 50%
+  transform: translateY(-50%)
+  background: var(--widget-background-color)
+  border: none
+  border-radius: 4px
+  width: 30px
+  height: 120px
+  cursor: pointer
+  z-index: 100
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
+  display: flex
+  align-items: center
+  justify-content: center
+  transition: all 0.3s ease
+  writing-mode: vertical-rl
+  font-size: 14px
+  padding: 10px 0
+  text-align: center
+  line-height: 1.2
+
+.left-toggle
+  left: 0
+  border-top-left-radius: 0
+  border-bottom-left-radius: 0
+
+.right-toggle
+  right: 0
+  border-top-right-radius: 0
+  border-bottom-right-radius: 0
+
+// Sidebar expanded states
+.left-column
+  position: fixed
+  left: 0
+  top: 0
+  bottom: 0
+  width: 300px
+  z-index: 99
+  background: var(--widget-background-color)
+  height: 100vh
+  overflow-y: auto
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1)
+  transform: translateX(-100%)
+  transition: transform 0.3s ease
+  padding: 0.5rem 0.25rem
+
+.left-column.expanded
+  transform: translateX(0)
+
+.right-column
+  position: fixed
+  right: 0
+  top: 0
+  bottom: 0
+  width: 300px
+  z-index: 99
+  background: var(--widget-background-color)
+  height: 100vh
+  overflow-y: auto
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1)
+  transform: translateX(100%)
+  transition: transform 0.3s ease
+  padding: 0.5rem 0.25rem
+
+.right-column.expanded
+  transform: translateX(0)
+
+// Initially hide sidebars on all screens
+.right-column, .left-column
+  display: block
+
+// big screen layout
+@media screen and (min-width: 1280px)
+  .left-column .display-when-two-columns, .widescreen-archive
+    display: none
+  .main-column
+    flex: 1
+    transition: margin 0.3s ease
+    margin-right: 300px // 默认右边栏展开
+  .left-column, .right-column
+    width: 300px
+    position: fixed
+    height: 100vh
+    z-index: 99
+  .left-column
+    left: 0
+    transform: translateX(-100%)
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1)
+  .right-column
+    right: 0
+    transform: translateX(100%)
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1)
+  .left-column.expanded
+    transform: translateX(0)
+  .right-column.expanded
+    transform: translateX(0)
+  // When sidebars are expanded, adjust main content
+  .main-column
+    margin-left: 0
+    margin-right: 300px
+  .left-column.expanded ~ .main-column
+    margin-left: 300px
+  .right-column.expanded ~ .main-column
+    margin-right: 300px
+  .left-column.expanded ~ .right-column.expanded ~ .main-column
+    margin-left: 300px
+    margin-right: 300px
+
+// sticky aside
+@media screen and (min-width: 1280px)
+  .sticky-widescreen
+    position: -webkit-sticky
+    position: sticky
+    top: 1.5rem
+    z-index: 100
+
+@media screen and (min-width: 862px)
+  .columns, .left-column, .main-column, .right-column
+    padding: 0.75rem
+  .sticky-tablet
+    position: -webkit-sticky
+    position: sticky
+    top: 1.5rem
+  .left-column
+    .sticky-tablet > div
+      margin-bottom: 1.5rem
+
+// Show toggle buttons
+.sidebar-toggle
+  display: flex

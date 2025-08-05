@@ -1,0 +1,107 @@
+.post-show-meta
+  margin-bottom: 1rem
+.post-content
+  dl, ol, ul, blockquote, h6, figure, pre, p, table
+    + *
+      margin-top: 1em
+  p
+    line-height: 1.8rem
+  blockquote
+    margin-top: 1rem
+    padding: 1rem
+    background-color: var(--blockquote-color)
+    transition: background-color 0.3s
+    border-left: 0.25rem solid var(--border-color)
+    p
+      margin-bottom: 0
+  ul
+    list-style: disc
+    margin-left: 1.2em
+  ol
+    list-style-position: outside
+    margin-left: 1.2em
+    margin-top: 0
+  ol:not([type])
+    list-style-type: decimal
+
+  h1, h2
+    border-top: 1px solid var(--border-color)
+    padding-top: 1rem
+    
+    padding-bottom: 1rem
+    border-bottom: 1px solid var(--border-color)
+
+  /*body {counter-reset: h1}*/
+  
+  /**
+   * Added by Chen Diao, 2021-04-15
+   * 1. post 文档的 header 增加编号
+   * 2. 调整 h1 字号
+   */
+  counter-reset: h1
+
+  h1 {counter-reset: h2; font-size: 2rem; font-weight: bold; align: center}
+  h2 {counter-reset: h3}
+  h3 {counter-reset: h4}
+  h4 {counter-reset: h5}
+  h5 {counter-reset: h6}
+
+
+  h1:before {counter-increment: h1; content: counter(h1) ". "}
+  h2:before {counter-increment: h2; content: counter(h1) "." counter(h2) ". "}
+  h3:before {counter-increment: h3; content: counter(h1) "." counter(h2) "." counter(h3) ". "}
+  h4:before {counter-increment: h4; content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". "}
+  h5:before {counter-increment: h5; content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". "}
+  h6:before {counter-increment: h6; content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". "}
+  
+  /*h1.nocount:before, h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none }*/
+
+
+.katex-block
+  overflow-x: auto
+mjx-container
+  overflow-x: auto
+  overflow-y: hidden
+  &:focus, svg:focus
+    outline: none
+/* post tags */
+.post-note
+  margin-top: 1rem
+  margin-bottom: 1rem
+  padding: 1rem
+  border-radius: 0.2rem
+  border-left-width: 0.25rem
+  border-left-style: solid
+  p
+    margin-bottom: 0
+.copyright
+  a
+    color: var(--text-color)
+    font-weight: bold
+  p
+    + p
+      margin-top: 8px
+.note-default
+  background-color: var(--blockquote-color)
+  border-left-color: var(--border-color)
+  transition: background-color 0.3s
+.note-primary
+  border-left-color: var(--note-primary-border-color)
+  background-color: var(--note-primary-color)
+  transition: background-color 0.3s
+.note-success
+  border-left-color: var(--note-success-border-color)
+  background-color: var(--note-success-color)
+  transition: background-color 0.3s
+.note-info
+  border-left-color: var(--note-info-border-color)
+  background-color: var(--note-info-color)
+  transition: background-color 0.3s
+.note-warning
+  border-left-color: var(--note-warning-border-color)
+  background-color: var(--note-warning-color)
+  transition: background-color 0.3s
+.note-danger
+  border-left-color: var(--note-danger-border-color)
+  background-color: var(--note-danger-color)
+  transition: background-color 0.3s
